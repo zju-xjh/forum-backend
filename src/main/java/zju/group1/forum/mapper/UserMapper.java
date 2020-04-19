@@ -2,15 +2,22 @@ package zju.group1.forum.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import zju.group1.forum.dto.GithubUser;
+import org.apache.ibatis.annotations.Update;
+import zju.group1.forum.dto.User;
 
 @Mapper
 public interface UserMapper {
 
-    @Insert("insert into user (login,id,bio,avatarUrl,token,gmtCreate,gmtModified) values (#{login},#{id},#{bio},#{avatar_url},#{token},#{gmtCreate},#{gmtModified}) " +
-            "on DUPLICATE KEY UPDATE gmtModified=#{gmtModified},token=#{token}")
-    void createUser(GithubUser user);
+    @Insert("insert into user (email,name,password,avatarUrl) values (#{email},#{name},#{password},#{avatarUrl})")
+    void createUser(User user);
 
+    @Select("select password from user where email = #{email}")
+    String verifyUser(String email);
+
+    @Update("update Forum set password = #{password} where email = #{email} ")
+    void updatePassword(String email, String password);
+
+    @Select("select count(*) from user where name=#{name}")
+    int isUserExist(User user);
 }
