@@ -18,6 +18,6 @@ public interface UserMapper {
     @Update("update Forum set password = #{password} where email = #{email} ")
     void updatePassword(String email, String password);
 
-    @Select("select count(*) from user where name=#{name}")
+    @Select("select count(*) from user where email=#{email}")
     int isUserExist(User user);
 }

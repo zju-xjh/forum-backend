@@ -70,6 +70,7 @@ public class RegisterController {
         String authorizeToken = encryptService.getMD5Code(user.getEmail());
         redisProvider.setAuthorizeToken(authorizeToken, user.getEmail());
         message.setMessage("用户创建成功");
+        message.setAuthorizeToken(authorizeToken);
         return message;
     }
 
