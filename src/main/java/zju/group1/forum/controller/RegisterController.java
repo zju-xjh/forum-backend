@@ -68,9 +68,12 @@ public class RegisterController {
         userMapper.createUser(user);
         message.setState(true);
         String authorizeToken = encryptService.getMD5Code(user.getEmail());
+        System.out.println(user.getEmail());
+        System.out.println(authorizeToken);
         redisProvider.setAuthorizeToken(authorizeToken, user.getEmail());
         message.setMessage("用户创建成功");
         message.setAuthorizeToken(authorizeToken);
+        System.out.println(message.toString());
         return message;
     }
 
