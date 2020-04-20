@@ -53,9 +53,9 @@ public class RegisterController {
 
         HttpSession session = request.getSession();
 
-        if (!session.getAttribute(user.getEmail()).toString().equals(user.getToken())) {
+        if (session.getAttribute(user.getEmail()) == null || !session.getAttribute(user.getEmail()).toString().equals(user.getToken())) {
             message.setState(false);
-            message.setMessage("您输入的验证码有误");
+            message.setMessage("您输入的验证码有误或为空");
             return message;
         }
 
