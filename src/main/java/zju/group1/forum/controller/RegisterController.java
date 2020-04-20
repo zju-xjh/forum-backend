@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import zju.group1.forum.dto.Message;
 import zju.group1.forum.dto.User;
 import zju.group1.forum.mapper.UserMapper;
+import zju.group1.forum.provider.RedisProvider;
+import zju.group1.forum.service.EncryptService;
 import zju.group1.forum.service.MailService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +27,12 @@ public class RegisterController {
 
     @Autowired
     private MailService mailService;
+
+    @Autowired
+    private EncryptService encryptService;
+
+    @Autowired
+    private RedisProvider redisProvider;
 
     @ApiOperation("用户注册")
     @PostMapping(value = "/register")
@@ -59,6 +67,8 @@ public class RegisterController {
 
         userMapper.createUser(user);
         message.setState(true);
+        String authorizeToken = encryptService.getMD5Code(user.getEmail());
+        redisProvider.setAuthorizeToken(authorizeToken, user.getEmail());
         message.setMessage("用户创建成功");
         return message;
     }
