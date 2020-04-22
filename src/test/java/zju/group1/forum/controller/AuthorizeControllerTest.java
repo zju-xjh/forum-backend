@@ -17,15 +17,15 @@ import static org.junit.Assert.*;
 @SpringBootTest(classes = ForumBackendApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 
 public class AuthorizeControllerTest {
-    @Autowired
-    private TestRestTemplate testRestTemplate;
-
-    @org.junit.Test
-    public void email_login() {
-        MultiValueMap multiValueMap = new LinkedMultiValueMap();
-        multiValueMap.add("email","279902745@qq.com");
-        multiValueMap.add("password","123456");
-        Message message = testRestTemplate.postForObject("/login", multiValueMap, Message.class);
-        assertEquals(message.getMessage(),"登陆成功！");
-    }
+//    @Autowired
+//    private TestRestTemplate testRestTemplate;
+//
+//    @org.junit.Test
+//    public void email_login() {
+//        MultiValueMap multiValueMap = new LinkedMultiValueMap();
+//        multiValueMap.add("email","279902745@qq.com");
+//        multiValueMap.add("password","123456");
+//        Message message = testRestTemplate.postForObject("/login", multiValueMap, Message.class);
+//        assertEquals(message.getMessage(),"登陆成功！");
+//    }
 }
